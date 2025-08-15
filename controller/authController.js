@@ -80,7 +80,7 @@ exports.postSignup = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-          console.log('Signup attempt:', req.body);
+          // ...existing code...
       return res.render("auth/signin", {
        
         errors: errors.array().map(err => err.msg),
@@ -90,7 +90,7 @@ exports.postSignup = [
     // Create new use
     bcrypt.hash(password, 12)
       .then(hashedPassword => {
-        console.log('Hashed Password:', hashedPassword);
+  // ...existing code...
     const user = new User({
       firstName,
       lastName,
@@ -99,7 +99,7 @@ exports.postSignup = [
       return user.save()
     })
       .then(() => {
-        console.log('User created successfully');
+  // ...existing code...
         // Store user info in session
         res.redirect('/login'); // Redirect to home page
       })
@@ -115,7 +115,7 @@ exports.postSignup = [
 
 exports.postLogin = async(req, res) => {
   const { email, password } = req.body;
-  console.log('Login attempt:', email);
+  // ...existing code...
     const user = await User.findOne({ email });
     if (!user) {
       return res.render("auth/login", {
@@ -135,7 +135,7 @@ exports.postLogin = async(req, res) => {
     // Store user info in session
     req.session.isLoggedIn = true;
     req.session.user = user;
-    console.log('User logged in:', user.email);
+  // ...existing code...
     res.redirect('/home'); // Redirect to home page
   };
 

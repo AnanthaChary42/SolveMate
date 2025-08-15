@@ -20,7 +20,7 @@ exports.getQuestion = async (req, res) => {
     solvedSet = new Set(freshUser?.solvedQuestions.map(id => id.toString()) || []);
   }
 
-  console.log('Solved Questions:', solvedSet);
+  // ...existing code...
 
   const html = cachedQuestions
     .map(q => q.renderCard(solvedSet.has(q._id.toString())))
@@ -37,7 +37,7 @@ exports.getQuestion = async (req, res) => {
 exports.filterQuestions = async (req, res) => {
   await loadQuestionsFromDb();
   const { difficulty, company, tag } = req.body;
-  console.log('req.query:', req.query);
+  // ...existing code...
   let solvedSet = new Set();
   if (req.user?._id) {
     const freshUser = await User.findById(req.user._id).lean();

@@ -67,7 +67,6 @@ app.use(
 app.use((req, res, next) => {
   req.isLoggedIn = req.session.isLoggedIn;
   req.user = req.session.user; // Attach user info to request
-   console.log(req.isLoggedIn); 
   next();
 });
 
@@ -88,7 +87,6 @@ app.use('/', (req, res, next) => {
   if (req.isLoggedIn) {
     return next(); // ✅ Logged in, proceed
   }
-  console.log('Redirecting to signuppage');
   return res.redirect('/login'); // ❌ Not logged in, go to signup
 });
 app.use('/', requestHandler);
@@ -100,7 +98,6 @@ app.use('/', userRouter); // User-related routes (e.g., toggle solved status)
 // Server Start
 // ====================
 const PORT = process.env.PORT || 3000;
-
 mongoose
   .connect(DB_PATH)
   .then(() => {
